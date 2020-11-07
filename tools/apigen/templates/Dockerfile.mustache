@@ -1,0 +1,12 @@
+FROM golang:1.14-alpine AS build
+WORKDIR /go/src
+ADD . .
+
+ENV CGO_ENABLED=0
+RUN go mod vendor
+RUN go build --mod=vendor -a -installsuffix cgo -o build/api .
+
+FROM alpine:edge AS runtime
+COPY --from=build /go/src/build/api ./
+EXPOSE 8080/tcp
+ENTRYPOINT ["./api"]
