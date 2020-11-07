@@ -1,7 +1,7 @@
 # API Settings
 
 GIT_USER_ID=sample-git-user
-GIT_REPO_ID=go-rest-apigen
+GIT_REPO_ID=sample-repo-id
 
 CONFIG=./configs/go-server-config.yaml
 INPUT_SPEC=./configs/petstore.yml
@@ -22,7 +22,7 @@ WHITE        := $(shell tput -Txterm setaf 7)
 RESET := $(shell tput -Txterm sgr0)
 
 # Generate API
-gen: _check
+gen:
 	@echo
 	@echo "${GREEN}# GEN: 1. Generate Code (by openapi-generator)${RESET}"
 	openapi-generator generate \
@@ -37,6 +37,7 @@ gen: _check
 	@echo
 	@echo "${GREEN}# GEN: 2. Copy and Move and Format Code (by shell script)${RESET}"
 	cp $(TEMPLATE_DIR)/.golangci.yml $(OUTDIR)/.golangci.yml
+	cp $(TEMPLATE_DIR)/Makefile $(OUTDIR)/Makefile
 
 	rm -rf $(OUTDIR)/internal/model
 	mkdir -p $(OUTDIR)/internal $(OUTDIR)/internal/model $(OUTDIR)/internal/service
@@ -51,11 +52,10 @@ gen: _check
 	grep -l 'model.\*' $(OUTDIR)/api/* | xargs sed -i.bak -e 's/model.\*/\*/g'
 	grep -l '\[\]User' $(OUTDIR)/api/* | xargs sed -i.bak -e 's/\[\]User/[]model.User/g'
 
-
 	rm $(OUTDIR)/api/*.bak
 
 	@echo
-	@echo "${GREEN}# GEN: 3. Install Vendor Code, and Remove Unuserd Packages (by go mod)${RESET}"
+	@echo "${GREEN}# GEN: 3. Install Vendor Code, and Remove Unused Packages (by go mod)${RESET}"
 	cd $(OUTDIR); go mod vendor
 	#cd $(OUTDIR); go mod tidy
 
@@ -73,7 +73,7 @@ gen: _check
 	cd $(OUTDIR)/api; redoc-cli bundle ./openapi.yaml
 
 # Regenerate API
-regen: _check
+regen:
 	@echo
 	@echo "${GREEN}# REGEN: 1. Remove and Generate API (by shell and make gen)${RESET}"
 	rm -rf $(OUTDIR)/api
@@ -83,10 +83,6 @@ regen: _check
 	@echo "${GREEN}# REGEN: 2. Reset api/*_service.go (by git checkout)${RESET}"
 	@echo "${YELLOW}Note: If you want to regenerate $(OUTDIR)/api/*_service.go too comment out below line${RESET}"
 	git checkout $(OUTDIR)/api/*_service.go
-
-# Show Static OpenAPI Document
-doc: _check
-	@cd $(OUTDIR)/api; open redoc-static.html
 
 # Download go-server templates from OpenAPITools
 # Use when you want to reset template
@@ -102,11 +98,4 @@ get-go-server-templates:
 get-petstore-sample-spec:
 	curl -so $(INPUT_SPEC) \
 	https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.yaml
-
-_check:
-#ifndef API_NAME
-#	@echo "Require API_NAME. (e.g. make gen API_NAME)";
-#	@echo ""
-#	@exit 1;
-#endif
 

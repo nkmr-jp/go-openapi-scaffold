@@ -19,45 +19,24 @@ redoc-cli --version
 # 0.9.12
 ```
 
-## Install
-```sh
-
-```
-
 ## Getting started
 ```
-make 
+git clone https://github.com/nkmr-jp/go-openapi-scaffold
+cd ../apigen
+make get-petstore-sample-spec
+make gen
+cd ../../e
 ```
 
-## Usage
 
-### Generate API
+## Install to your project
 ```sh
-make gen 
+cd [you project path]
+svn checkout https://github.com/nkmr-jp/go-openapi-scaffold/trunk/apigen
+cd apigen
+rm .svn
+
+git add .
+git commit "Add apigen from https://github.com/nkmr-jp/go-openapi-scaffold"
 ```
 
-### Regenerate API
-delete and generate API
-```sh
-make regen
-```
-
-### Start API
-```sh
-make start
-```
-
-### Log Stream
-```sh
-make logs LEVEL=ERROR
-```
-
-### Show Last error details
-```sh
-make inspect
-```
-
-### Show OpenAPI Static Document in browser
-```sh
-make doc
-```

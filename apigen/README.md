@@ -26,20 +26,7 @@ delete and generate API
 make regen
 ```
 
-### Start API
-```sh
-make start
-```
 
-### Log Stream
-```sh
-make logs LEVEL=ERROR
-```
-
-### Show Last error details
-```sh
-make inspect
-```
 
 ### Show OpenAPI Static Document in browser
 ```sh
