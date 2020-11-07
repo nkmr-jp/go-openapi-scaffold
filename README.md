@@ -102,7 +102,7 @@ git commit "Add apigen from https://github.com/nkmr-jp/go-openapi-scaffold"
 
 ### Step 2. update api settings
 
-`apigen/makefile`
+`apigen/Makefile`
 ```Makefile
 # Update below settings to your own project
 GIT_USER_ID=sample-git-user
