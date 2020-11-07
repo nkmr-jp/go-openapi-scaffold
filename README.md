@@ -1,5 +1,25 @@
 # go-openapi-scaffold
 
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [go-openapi-scaffold](#go-openapi-scaffold)
+  - [Prepare](#prepare)
+  - [Getting Started](#getting-started)
+    - [Step 1. get resources](#step-1-get-resources)
+    - [Step 2. update spec](#step-2-update-spec)
+    - [Step 3. generate api](#step-3-generate-api)
+    - [Step 4. run api](#step-4-run-api)
+    - [Step 5. show api document](#step-5-show-api-document)
+  - [How to use in your project](#how-to-use-in-your-project)
+    - [Step 1. get apigen](#step-1-get-apigen)
+    - [Step 2. update api settings](#step-2-update-api-settings)
+
+<!-- /code_chunk_output -->
+
+
 ## Prepare
 
 ```sh
