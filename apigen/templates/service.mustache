@@ -2,6 +2,7 @@
 package {{packageName}}
 
 import (
+	"context"
 	"errors"{{#imports}}
 	"{{import}}"{{/imports}}
     "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}/internal/model"
@@ -19,6 +20,6 @@ func New{{classname}}Service() {{classname}}Servicer {
 }{{#operations}}{{#operation}}
 
 // {{nickname}} - {{summary}}
-func (s *{{classname}}Service) {{nickname}}({{#allParams}}{{paramName}} model.{{dataType}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) (interface{}, error) {
+func (s *{{classname}}Service) {{nickname}}(ctx context.Context, {{#allParams}}{{paramName}} model.{{dataType}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) (interface{}, error) {
 	return nil, errors.New("service method '{{nickname}}' not implemented") // TODO - Add implementation to ../internal/service package
 }{{/operation}}{{/operations}}
