@@ -23,5 +23,5 @@ func main() {
 		{{classname}}Controller,{{/apis}}
 	{{/apiInfo}})
 
-	logger.Fatalf("LISTEN_AND_SERVE_ERROR", http.ListenAndServe(":8080", router))
+	logger.Fatalf("LISTEN_AND_SERVE_ERROR", http.ListenAndServe(":{{serverPort}}", router))
 }
