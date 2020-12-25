@@ -1,5 +1,4 @@
 start:
-	go mod vendor
 	go run main.go
 
 doc:

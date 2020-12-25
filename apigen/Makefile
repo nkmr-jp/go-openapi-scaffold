@@ -56,8 +56,7 @@ gen:
 
 	@echo
 	@echo "${GREEN}# GEN: 3. Install Vendor Code, and Remove Unused Packages (by go mod)${RESET}"
-	cd $(OUTDIR); go mod vendor
-	#cd $(OUTDIR); go mod tidy
+	cd $(OUTDIR); go mod download
 
 	@echo
 	@echo "${GREEN}# GEN: 4. Formant and Lint (by golang packages)${RESET}"

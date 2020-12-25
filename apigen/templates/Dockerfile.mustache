@@ -3,8 +3,7 @@ WORKDIR /go/src
 ADD . .
 
 ENV CGO_ENABLED=0
-RUN go mod vendor
-RUN go build --mod=vendor -a -installsuffix cgo -o build/api .
+RUN go build -mod=readonly -a -installsuffix cgo -o build/apiserver .
 
 FROM alpine:edge AS runtime
 COPY --from=build /go/src/build/api ./
